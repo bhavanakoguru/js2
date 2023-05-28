@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>
+		</title>
+		<style>
+			.totaluserdata
+			{
+				display:flex;
+				flex-wrap:wrap;
+			}
+			.divdata
+			{
+				margin-left:30px;
+				border:2px solid black;
+				margin-bottom:10px;
+				width:300px;
+			}
+			.styleforimg
+			{
+				width:250px;
+				margin:10px;
+			}
+		</style>
+	</head>
+	<body>
+		
+			<input type="text" class="input"/>
+			<button onClick="search()">Search</button>
+			<br><br>
+		
+		<div class="totaluserdata"></div>
+	</body>
+	<script>
+		        var logo = document.getElementById("user");
+		        var totaluserdata=document.querySelector(".totaluserdata");
+		        let repos;
+		        
+			 async function search()
+			 {
+			 	 let n=document.querySelector(".input").value;
+			 	// console.log(n);
+			 	 let response = await fetch(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${n}&apikey=3ad548118680d3dad3f194ff9e289c93&hash=2bf68c80955bd4f084b8fe653c6683a0&ts=1685222640625`);
+			 	       // console.log(n);
+				 	let result = await response.json();
+				 	let repos = result['data'];
+				 	let repos1=repos['results'];
+				 	//let repo2=repos1['items'];
+				 	//console.log(repo2);
+				 	
+			 		for(let i=0;i<repos1.length;i++)
+			 		{
+			 			
+			 			
+			 			
+			 			let div=document.createElement("div");
+			 			div.setAttribute("class","divdata");
+			 			
+			 			
+			 			let name=document.createElement("p");
+			 			name.innerText="Name:"+repos1[i].comics.items[i].name;
+			 			
+			 			
+			 			div.append(name);
+			 			//console.log(div);
+			 			totaluserdata.append(div);
+			 		}
+			}
+			
+	</script>
+</html>
